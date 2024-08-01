@@ -24,6 +24,7 @@ mavenPublishing {
     pom {
         name.set("Versions Catalog")
         description.set("A library to generate a catalog of versions on build modules")
+        url.set("https://github.com/piroworkz/KspCatalogGenerator")
         licenses {
             license {
                 name = "Apache-2.0"
@@ -40,7 +41,11 @@ mavenPublishing {
         }
 
         scm {
-
+            connection =
+                "scm:git:git://github.com/piroworkz/KspCatalogGenerator.git"
+            developerConnection =
+                "scm:git:ssh://github.com/piroworkz/KspCatalogGenerator.git"
+            url = "https://github.com/piroworkz/KspCatalogGenerator"
         }
 
     }

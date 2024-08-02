@@ -20,6 +20,7 @@ class CatalogGenerator(private val codeGenerator: CodeGenerator) {
             .buildLibsProperty()
             .buildLibraries(catalog.libraries)
             .buildPlugins(catalog.plugins)
+            .buildBundles(catalog.bundles)
             .build()
         fileSpec.writeTo(codeGenerator = codeGenerator, aggregating = true)
     }
@@ -82,6 +83,31 @@ class CatalogGenerator(private val codeGenerator: CodeGenerator) {
         return this
     }
 
+    private fun FileSpec.Builder.buildBundles(bundles: List<String>): FileSpec.Builder {
+        bundles.forEach { name ->
+            val propertySpec = PropertySpec.builder(
+                name = name.lowerCamelCase(),
+                type = ClassName("org.gradle.api.provider", "Provider")
+                    .parameterizedBy(
+                        ClassName(
+                            "org.gradle.api.artifacts",
+                            "ExternalModuleDependencyBundle"
+                        )
+                    ),
+                modifiers = listOf(KModifier.INTERNAL)
+            )
+                .receiver(ClassName("org.gradle.api.artifacts", "VersionCatalog"))
+                .getter(
+                    FunSpec.getterBuilder()
+                        .addStatement(
+                            "return findBundle(\"$name\").get()",
+                        ).build()
+                ).build()
+            addProperty(propertySpec)
+        }
+        return this
+    }
+
     private fun libsPropertyGetter() = FunSpec.getterBuilder()
         .addStatement(
             "return extensions.getByType(%T::class.java).named(\"libs\")",
@@ -89,9 +115,9 @@ class CatalogGenerator(private val codeGenerator: CodeGenerator) {
         ).build()
 
     private fun String.lowerCamelCase(): String =
-        if (!contains("-") || !contains(".")) {
+        if (!contains(".")) {
             this
-        } else split('_', '.')
+        } else split('.')
             .mapIndexed { index, s ->
                 if (index == 0) s.lowercase()
                 else s.replaceFirstChar { it.uppercase() }

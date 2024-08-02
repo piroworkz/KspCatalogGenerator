@@ -17,9 +17,10 @@ class GenerateVersionsCatalogProcessor(
     private val catalogGenerator = CatalogGenerator(codeGenerator = codeGenerator)
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
-        val file = File(libs)
-        val catalog: Catalog = Catalog.parseFile(file)
         try {
+            val file = File(libs)
+            val catalog: Catalog = Catalog.parseFile(file)
+            logger.info("Catalog: $catalog")
             catalogGenerator.generate(catalog, packageName)
         } catch (e: FileAlreadyExistsException) {
             logger.info("File already exists")

@@ -20,7 +20,7 @@ dependencies {
 
 mavenPublishing {
     configure(KotlinJvm(JavadocJar.Javadoc(), true))
-    coordinates("com.piroworkz", "versions-catalog", "1.0.0")
+    coordinates("com.piroworkz", "versions-catalog", "1.0.1")
     pom {
         name.set("Versions Catalog")
         description.set("A library to generate a catalog of versions on build modules")

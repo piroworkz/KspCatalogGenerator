@@ -31,7 +31,7 @@ data class Catalog(
                 val sectionContent = sectionContents[index]
                 val keys = keyValueRegex
                     .findAll(sectionContent)
-                    .map { it.groupValues[1].lowerCamelCase() }
+                    .map { it.groupValues[1] }
                     .toList()
 
                 when (section) {
@@ -43,14 +43,5 @@ data class Catalog(
             }
             return Catalog(versions, libraries, plugins, bundles)
         }
-
-        private fun String.lowerCamelCase(): String =
-            if (!contains("-") || !contains(".")) {
-                this
-            } else split('_', '.')
-                .mapIndexed { index, s ->
-                    if (index == 0) s.lowercase()
-                    else s.replaceFirstChar { it.uppercase() }
-                }.joinToString("")
     }
 }

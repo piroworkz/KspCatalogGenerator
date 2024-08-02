@@ -42,7 +42,7 @@ class CatalogGenerator(private val codeGenerator: CodeGenerator) {
     private fun FileSpec.Builder.buildLibraries(libraries: List<String>): FileSpec.Builder {
         libraries.forEach { name ->
             val propertySpec = PropertySpec.builder(
-                name = name,
+                name = name.lowerCamelCase(),
                 type = ClassName("org.gradle.api.provider", "Provider")
                     .parameterizedBy(
                         ClassName(
@@ -67,7 +67,7 @@ class CatalogGenerator(private val codeGenerator: CodeGenerator) {
     private fun FileSpec.Builder.buildPlugins(pluginNames: List<String>): FileSpec.Builder {
         pluginNames.forEach { name ->
             val propertySpec = PropertySpec.builder(
-                name = name,
+                name = name.lowerCamelCase(),
                 type = ClassName("org.gradle.api.provider", "Provider")
                     .parameterizedBy(ClassName("org.gradle.plugin.use", "PluginDependency")),
                 modifiers = listOf(KModifier.INTERNAL)
@@ -87,4 +87,13 @@ class CatalogGenerator(private val codeGenerator: CodeGenerator) {
             "return extensions.getByType(%T::class.java).named(\"libs\")",
             ClassName("org.gradle.api.artifacts", "VersionCatalogsExtension"),
         ).build()
+
+    private fun String.lowerCamelCase(): String =
+        if (!contains("-") || !contains(".")) {
+            this
+        } else split('_', '.')
+            .mapIndexed { index, s ->
+                if (index == 0) s.lowercase()
+                else s.replaceFirstChar { it.uppercase() }
+            }.joinToString("")
 }

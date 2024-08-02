@@ -3,13 +3,17 @@ kotlin = "2.0.0"
 kotlinpoet = "1.18.1"
 ksp = "2.0.0-1.0.23"
 mavenPublish = "0.28.0"
+agp = "8.5.1"
+kotlinVersion = "2.0.0"
 
 #libraries
 [libraries]
-kotlinPoet = { group = "com.squareup", name = "kotlinpoet-ksp", version.ref = "kotlinpoet"}
+kotlin-poet = { group = "com.squareup", name = "kotlinpoet-ksp", version.ref = "kotlinpoet"}
 symbolProcessingApi = { group = "com.google.devtools.ksp", name = "symbol-processing-api", version.ref ="ksp" }
 
 [plugins]
 kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 mavenPublish = { id = "com.vanniktech.maven.publish", version.ref = "mavenPublish" }
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }

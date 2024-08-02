@@ -6,6 +6,8 @@ plugins {
     alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.ksp)
     alias(libs.plugins.mavenPublish)
+    alias(libs.plugins.androidApplication) apply false
+    alias(libs.plugins.jetbrainsKotlinAndroid) apply false
 }
 
 java {
@@ -14,13 +16,13 @@ java {
 }
 
 dependencies {
-    implementation(libs.kotlinPoet)
+    implementation(libs.kotlin.poet)
     implementation(libs.symbolProcessingApi)
 }
 
 mavenPublishing {
     configure(KotlinJvm(JavadocJar.Javadoc(), true))
-    coordinates("com.piroworkz", "versions-catalog", "1.0.1")
+    coordinates("com.piroworkz", "versions-catalog", "1.0.2")
     pom {
         name.set("Versions Catalog")
         description.set("A library to generate a catalog of versions on build modules")

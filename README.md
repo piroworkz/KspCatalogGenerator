@@ -3,15 +3,15 @@
 **KSP Versions Catalog Processor** is a library for easily handling permission requests in Android applications developed with Jetpack Compose.
 
 ## Installation
-Current Version: 1.0.1
+Current Version: 1.0.2
 
 ```kotlin
-ksp("com.piroworkz:versions-catalog:1.0.1")
+ksp("com.piroworkz:versions-catalog:1.0.2")
 ```
 **Versions Catalog**
 ```Versions catalog
 [versions]
-piroworkz = "1.0.1"
+piroworkz = "1.0.2"
 [libraries]
 piroworkzVersionsCatalog = { module = "com.piroworkz:versions-catalog", version.ref = "piroworkz" }
 

@@ -19,7 +19,7 @@ data class Catalog(
             val bundles = mutableListOf<String>()
 
             val sectionRegex = Regex("""^\[(\w+)]""", RegexOption.MULTILINE)
-            val keyValueRegex = Regex("""^(\w+) =""", RegexOption.MULTILINE)
+            val keyValueRegex = Regex("""^(\w[\w-]*)\s*=""", RegexOption.MULTILINE)
 
             val sections = sectionRegex.findAll(fileContent)
                 .map { it.groupValues[1] }
@@ -31,7 +31,7 @@ data class Catalog(
                 val sectionContent = sectionContents[index]
                 val keys = keyValueRegex
                     .findAll(sectionContent)
-                    .map { it.groupValues[1] }
+                    .map { it.groupValues[1].replace(Regex("""[-_]"""), ".") }
                     .toList()
 
                 when (section) {

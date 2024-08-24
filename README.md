@@ -1,6 +1,6 @@
 # KSP Versions Catalog Processor
 
-**KSP Versions Catalog Processor** is a library for easily handling permission requests in Android applications developed with Jetpack Compose.
+**KSP Versions Catalog Processor** is a library that reads your libs.versions.toml file and generates variables for [libraries], [plugins] and [bundles], that you can use in your build-logic convention module.
 
 ## Installation
 Current Version: 1.0.2

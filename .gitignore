@@ -1,16 +1,35 @@
+# Ignore Gradle files
+.gradle/
+build/
+
+# Ignore IntelliJ IDEA project files
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+*.ipr
+*.iws
+out/
+
+# Ignore macOS system files
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
-gradle.properties
+
+# Ignore logs
+*.log
+
+# Ignore Gradle wrapper binaries
+!gradle/wrapper/gradle-wrapper.jar
+
+# Ignore other system files
+*.swp
+*.swo
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.rej
+
+# Ignore generated files
+contexts/PROJECT_CONTEXT.md
+

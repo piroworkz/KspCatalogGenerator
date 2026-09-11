@@ -9,6 +9,9 @@ build/
 *.iws
 out/
 
+# Ignore local Gradle/SDK config
+local.properties
+
 # Ignore macOS system files
 .DS_Store
 
@@ -33,3 +36,7 @@ out/
 # Ignore generated files
 contexts/PROJECT_CONTEXT.md
 
+
+# Claude AI session files
+CLAUDE.md
+.claude/
